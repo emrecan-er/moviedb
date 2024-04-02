@@ -19,6 +19,8 @@ dependencies:
 
 #State Management
   get: ^4.6.6
+  http: ^1.2.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +36,7 @@ flutter:
 
   assets:
     - assets/
+    - .env
 
  
   fonts:

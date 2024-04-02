@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 
 class FilmCard extends StatelessWidget {
-  String categories;
+  String releaseDate;
   String filmName;
   String photoUrl;
   String rating;
   FilmCard({
-    required this.categories,
+    required this.releaseDate,
     required this.filmName,
     required this.photoUrl,
     required this.rating,
@@ -20,7 +20,7 @@ class FilmCard extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         width: Get.width,
-        height: 200,
+        height: 180,
         decoration: BoxDecoration(
           color: kCardColor,
           borderRadius: BorderRadius.circular(8),
@@ -36,9 +36,9 @@ class FilmCard extends StatelessWidget {
                       topLeft: Radius.circular(8),
                       bottomLeft: Radius.circular(8)),
                   child: Image.network(
-                    photoUrl,
+                    'http://image.tmdb.org/t/p/w500/' + photoUrl,
                     fit: BoxFit.contain,
-                    height: 200,
+                    height: 180,
                   ),
                 )
               ],
@@ -48,21 +48,39 @@ class FilmCard extends StatelessWidget {
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      categories,
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
                       filmName,
                       style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  Container(
+                    width: 120,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white54),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          color: Colors.white,
+                          size: 19,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          releaseDate,
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ],
                     ),
                   ),
                   Row(
