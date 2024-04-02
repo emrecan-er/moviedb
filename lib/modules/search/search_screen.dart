@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/controllers/film_controller.dart';
 import 'package:movie/models/movie.dart';
+import 'package:movie/modules/movie_details/movie_details.dart';
 import 'package:movie/modules/search/components/custom_text_field.dart';
-import 'package:movie/modules/search/components/film_card.dart';
+import 'package:movie/modules/search/components/movie_card.dart';
 import 'package:movie/utils/get_from_api.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -28,8 +29,9 @@ class SearchScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Text(
-                'Popular',
+                'Explore 🪩',
                 style: TextStyle(
+                  fontSize: 17,
                   color: Colors.white,
                 ),
               ),
@@ -56,6 +58,9 @@ class SearchScreen extends StatelessWidget {
                           filmName: movie.title,
                           photoUrl: movie.posterPath,
                           rating: movie.voteAverage.toStringAsFixed(1),
+                          onTap: () {
+                            Get.off(MovieDetails(movie: movie));
+                          },
                         );
                       },
                     );
