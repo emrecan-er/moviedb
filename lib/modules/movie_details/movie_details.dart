@@ -1,16 +1,15 @@
 import 'dart:ui';
-
-import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/models/movie.dart';
+import 'package:movie/modules/main/main_screen.dart';
 import 'package:movie/modules/search/search_screen.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;
 
-  const MovieDetails({Key? key, required this.movie}) : super(key: key);
+  const MovieDetails({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class MovieDetails extends StatelessWidget {
                   child: AppBar(
                     leading: IconButton(
                         onPressed: () {
-                          Get.to(SearchScreen());
+                          Get.to(MainScreen());
                         },
                         icon: Icon(Icons.arrow_back)),
                     backgroundColor: Colors.transparent,

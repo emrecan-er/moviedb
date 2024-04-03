@@ -4,7 +4,7 @@ import 'package:movie/constants.dart';
 
 class CustomFormField extends StatelessWidget {
   late final bool obscureText;
-
+  late final IconData prefixIcon;
   late final String hint;
   void Function(String) onChanged;
 
@@ -12,17 +12,18 @@ class CustomFormField extends StatelessWidget {
     required this.hint,
     required this.obscureText,
     required this.onChanged,
+    required this.prefixIcon,
   });
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       child: Form(
         key: key,
         child: TextFormField(
           cursorColor: kButtonColor,
           keyboardType: TextInputType.multiline,
-          maxLines: null,
+          maxLines: 1,
           scrollPadding: EdgeInsets.only(bottom: 40),
           onChanged: onChanged,
           obscureText: obscureText,
@@ -35,7 +36,7 @@ class CustomFormField extends StatelessWidget {
           decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.red),
             prefixIcon: Icon(
-              Icons.search_rounded,
+              prefixIcon,
               color: Colors.white,
             ),
             filled: true,

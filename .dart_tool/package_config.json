@@ -2,16 +2,16 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "archive",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/archive-3.4.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "async",
       "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
-    },
-    {
-      "name": "blur",
-      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/blur-3.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
     },
     {
       "name": "boolean_selector",
@@ -36,6 +36,18 @@
       "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "convert",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "cupertino_icons",
@@ -92,10 +104,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "js",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/js-0.7.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "lottie",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/lottie-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "matcher",
@@ -120,6 +144,12 @@
       "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "pointycastle",
+      "rootUri": "file:///Users/emrecaner/.pub-cache/hosted/pub.dev/pointycastle-3.7.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "sky_engine",
@@ -188,7 +218,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-02T23:03:50.446352Z",
+  "generated": "2024-04-03T12:59:09.657833Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }

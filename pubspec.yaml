@@ -8,38 +8,34 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.2.6 <4.0.0'
 
-
 dependencies:
   flutter:
     sdk: flutter
-
-
-
   cupertino_icons: ^1.0.2
 
 #State Management
   get: ^4.6.6
+
+  #API
   http: ^1.2.0
+
+  #Key Safety
   flutter_dotenv: ^5.1.0
-  blur: ^3.1.0
+
+  #Animations
+  lottie: ^3.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
   flutter_lints: ^2.0.0
 
 flutter:
-
-
   uses-material-design: true
-
   assets:
     - assets/
     - .env
 
- 
   fonts:
     - family: VarelaRound
       fonts:

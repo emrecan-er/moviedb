@@ -3,13 +3,15 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/modules/movie_details/movie_details.dart';
 
-class FilmCard extends StatelessWidget {
+class MovieCard extends StatelessWidget {
   String releaseDate;
   String filmName;
   String photoUrl;
+  String heroTag;
   String rating;
   Function() onTap;
-  FilmCard({
+  MovieCard({
+    required this.heroTag,
     required this.releaseDate,
     required this.filmName,
     required this.onTap,
