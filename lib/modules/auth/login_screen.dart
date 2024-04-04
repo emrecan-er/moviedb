@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie/constants.dart';
+import 'package:movie/controllers/auth_controller.dart';
 import 'package:movie/modules/auth/components/login_button.dart';
+import 'package:movie/modules/main/main_screen.dart';
 import 'package:movie/modules/search/components/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final AuthController authController = Get.put(AuthController());
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +18,8 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Center(
               child: Text(
                 'The Movie Manager',
@@ -23,8 +27,8 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Login with Email',
               style: TextStyle(color: Colors.white54, fontSize: 15),
@@ -33,19 +37,28 @@ class LoginScreen extends StatelessWidget {
           CustomFormField(
             hint: 'Email',
             obscureText: false,
-            onChanged: (input) {},
+            onChanged: (input) {
+              authController.username.value = input;
+            },
             prefixIcon: Icons.person,
           ),
           CustomFormField(
             hint: 'Password',
             obscureText: true,
-            onChanged: (input) {},
+            onChanged: (input) {
+              authController.password.value = input;
+            },
             prefixIcon: Icons.password,
           ),
           SizedBox(
             height: 10,
           ),
-          LoginButton(text: 'Login', onTap: () {}),
+          LoginButton(
+              text: 'Login',
+              onTap: () {
+                authController.authenticateUser(authController.username.value,
+                    authController.password.value);
+              }),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -53,7 +66,15 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white54, fontSize: 20),
             ),
           ),
-          LoginButton(text: 'Login via Website', onTap: () {}),
+          LoginButton(
+              text: 'Login via Website',
+              onTap: () {
+                authController.loginViaWebsite().then((sessionId) {
+                  if (sessionId != 'asd' && sessionId.isNotEmpty) {
+                    Get.offAll(MainScreen());
+                  } else {}
+                });
+              }),
         ],
       ),
     );

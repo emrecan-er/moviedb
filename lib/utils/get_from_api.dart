@@ -5,9 +5,9 @@ import 'package:movie/models/movie.dart';
 
 Future<List<Movie>> fetchMovies() async {
   final String url =
-      'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+      'https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
   final String token =
-      dotenv.env['API_KEY']!; //API KEY'I DAHA GUVENLI HALE GETIRDIM
+      dotenv.env['SESSION_KEY']!; //API KEY'I DAHA GUVENLI HALE GETIRDIM
 
   final response = await http.get(
     Uri.parse(url),
