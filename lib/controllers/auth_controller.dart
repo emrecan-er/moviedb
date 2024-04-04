@@ -26,7 +26,7 @@ class AuthController extends GetxController {
       }
     } catch (error) {
       print('Login via website failed: $error');
-      return 'asds';
+      return 'failed';
     }
   }
 
@@ -51,8 +51,7 @@ class AuthController extends GetxController {
       String username, String password, String requestToken) async {
     const String apiUrl =
         'https://api.themoviedb.org/3/authentication/token/validate_with_login';
-    String apiKey =
-        'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
+    String apiKey = dotenv.env['SESSION_KEY']!;
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {

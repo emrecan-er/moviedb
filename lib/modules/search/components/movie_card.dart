@@ -40,11 +40,17 @@ class MovieCard extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8),
                         bottomLeft: Radius.circular(8)),
-                    child: Image.network(
-                      'http://image.tmdb.org/t/p/w500/' + photoUrl,
-                      fit: BoxFit.contain,
-                      height: 180,
-                    ),
+                    child: photoUrl == ''
+                        ? Image.network(
+                            'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg',
+                            fit: BoxFit.contain,
+                            height: 180,
+                          )
+                        : Image.network(
+                            'http://image.tmdb.org/t/p/w500/' + photoUrl,
+                            fit: BoxFit.contain,
+                            height: 180,
+                          ),
                   )
                 ],
               ),
@@ -59,7 +65,9 @@ class MovieCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        filmName,
+                        filmName.length > 50
+                            ? filmName.substring(0, 20) + '...'
+                            : filmName,
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),

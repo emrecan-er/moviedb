@@ -55,10 +55,18 @@ class MovieDetails extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          'http://image.tmdb.org/t/p/w500/' + movie.posterPath,
-                          fit: BoxFit.fitHeight,
-                        ),
+                        child: movie.posterPath == ''
+                            ? Image.network(
+                                'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg',
+                                fit: BoxFit.contain,
+                                height: 180,
+                              )
+                            : Image.network(
+                                'http://image.tmdb.org/t/p/w500/' +
+                                    movie.posterPath,
+                                fit: BoxFit.contain,
+                                height: 180,
+                              ),
                       ),
                     ),
                   ),
@@ -70,7 +78,7 @@ class MovieDetails extends StatelessWidget {
                   child: AppBar(
                     leading: IconButton(
                         onPressed: () {
-                          Get.to(MainScreen());
+                          Get.off(MainScreen());
                           controller.searchedMovies.clear();
                         },
                         icon: Icon(Icons.arrow_back)),
