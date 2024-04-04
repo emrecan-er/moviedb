@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -25,41 +27,74 @@ class SearchScreen extends StatelessWidget {
               prefixIcon: Icons.search_rounded,
               hint: 'Search',
               obscureText: false,
-              onChanged: (input) {},
+              onChanged: (input) {
+                searchMovies(input);
+              },
             ),
-            Expanded(
-              child: FutureBuilder<List<Movie>>(
-                future: fetchMovies(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                        child: Lottie.asset('assets/popcorn.json', width: 100));
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text("${snapshot.error}"));
-                  } else if (!snapshot.hasData) {
-                    return const Center(child: Text("No data available"));
-                  } else {
-                    List<Movie> movies = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: movies.length,
-                      itemBuilder: (context, index) {
-                        Movie movie = movies[index];
-                        return MovieCard(
-                          heroTag: 'poster',
-                          releaseDate:
-                              controller.formatReleaseDate(movie.releaseDate),
-                          filmName: movie.title,
-                          photoUrl: movie.posterPath,
-                          rating: movie.voteAverage.toStringAsFixed(1),
-                          onTap: () {
-                            Get.off(MovieDetails(movie: movie));
+            Obx(
+              () => controller.searchedMovies.isNotEmpty
+                  ? Expanded(
+                      child: Obx(() {
+                        return ListView.builder(
+                          itemCount: controller.searchedMovies.length,
+                          itemBuilder: (context, index) {
+                            Movie movie = controller.searchedMovies[index];
+                            return MovieCard(
+                              releaseDate: controller
+                                  .formatReleaseDate(movie.releaseDate),
+                              filmName: movie.title,
+                              photoUrl: movie.posterPath,
+                              rating: movie.voteAverage.toStringAsFixed(1),
+                              onTap: () {
+                                Get.off(MovieDetails(
+                                  movie: movie,
+                                  controller: controller,
+                                ));
+                              },
+                            );
                           },
                         );
-                      },
-                    );
-                  }
-                },
-              ),
+                      }),
+                    )
+                  : Expanded(
+                      child: FutureBuilder<List<Movie>>(
+                        future: fetchMovies(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: Lottie.asset('assets/popcorn.json',
+                                    width: 100));
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text("${snapshot.error}"));
+                          } else if (!snapshot.hasData) {
+                            return const Center(
+                                child: Text("No data available"));
+                          } else {
+                            List<Movie> movies = snapshot.data!;
+                            return ListView.builder(
+                              itemCount: movies.length,
+                              itemBuilder: (context, index) {
+                                Movie movie = movies[index];
+                                return MovieCard(
+                                  releaseDate: controller
+                                      .formatReleaseDate(movie.releaseDate),
+                                  filmName: movie.title,
+                                  photoUrl: movie.posterPath,
+                                  rating: movie.voteAverage.toStringAsFixed(1),
+                                  onTap: () {
+                                    Get.off(MovieDetails(
+                                      movie: movie,
+                                      controller: controller,
+                                    ));
+                                  },
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ),
             ),
           ],
         ),

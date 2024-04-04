@@ -17,7 +17,6 @@ class MainScreen extends StatelessWidget {
       onTap: () {},
       photoUrl: '',
       rating: '',
-      heroTag: '',
     ),
   ];
 

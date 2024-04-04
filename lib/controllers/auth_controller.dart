@@ -18,14 +18,15 @@ class AuthController extends GetxController {
 
       if (await canLaunch(loginUrl)) {
         await launch(loginUrl);
+        log(requestToken);
+        var sessionId = await createSession(requestToken);
+        return sessionId;
       } else {
         throw 'Could not launch $loginUrl';
       }
-      var sessionId = await createSession(requestToken);
-      return sessionId;
     } catch (error) {
       print('Login via website failed: $error');
-      return 'asd';
+      return 'asds';
     }
   }
 
@@ -92,36 +93,13 @@ class AuthController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      log('geldi');
       final responseData = json.decode(response.body);
       return responseData['session_id'];
     } else {
-      throw Exception('Failed to create session');
-    }
-  }
-
-  Future<void> logoutUser(String sessionId) async {
-    try {
-      final String apiUrl =
-          'https://api.themoviedb.org/3/authentication/session';
-      final String apiKey = dotenv.env['SESSION_KEY']!;
-
-      final response = await http.delete(
-        Uri.parse('$apiUrl?api_key=$apiKey'),
-        headers: {
-          'Authorization': 'Bearer $sessionId',
-          'content-type': 'application/json',
-          'accept': 'application/json'
-        },
-      );
-
-      if (response.statusCode == 200) {
-        print('User logged out successfully.');
-      } else {
-        throw Exception('Failed to log out user');
-      }
-    } catch (error) {
-      print('Logout failed: $error');
+      final errorResponse = json.decode(response.body);
+      final errorMessage =
+          errorResponse['status_message'] ?? 'Unknown error occurred';
+      throw Exception('Failed to create session: $errorMessage');
     }
   }
 

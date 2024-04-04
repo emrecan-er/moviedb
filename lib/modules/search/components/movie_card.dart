@@ -7,11 +7,9 @@ class MovieCard extends StatelessWidget {
   String releaseDate;
   String filmName;
   String photoUrl;
-  String heroTag;
   String rating;
   Function() onTap;
   MovieCard({
-    required this.heroTag,
     required this.releaseDate,
     required this.filmName,
     required this.onTap,

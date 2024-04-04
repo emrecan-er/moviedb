@@ -2,14 +2,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:movie/constants.dart';
+import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/models/movie.dart';
 import 'package:movie/modules/main/main_screen.dart';
 import 'package:movie/modules/search/search_screen.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;
+  final MovieController controller;
 
-  const MovieDetails({required this.movie});
+  const MovieDetails({required this.movie, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,7 @@ class MovieDetails extends StatelessWidget {
                     leading: IconButton(
                         onPressed: () {
                           Get.to(MainScreen());
+                          controller.searchedMovies.clear();
                         },
                         icon: Icon(Icons.arrow_back)),
                     backgroundColor: Colors.transparent,
