@@ -40,6 +40,7 @@ class SearchScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             Movie movie = controller.searchedMovies[index];
                             return MovieCard(
+                              movieId: movie.id.toString(),
                               releaseDate: controller
                                   .formatReleaseDate(movie.releaseDate),
                               filmName: movie.title,
@@ -76,7 +77,9 @@ class SearchScreen extends StatelessWidget {
                               itemCount: movies.length,
                               itemBuilder: (context, index) {
                                 Movie movie = movies[index];
+
                                 return MovieCard(
+                                  movieId: movie.id.toString(),
                                   releaseDate: controller
                                       .formatReleaseDate(movie.releaseDate),
                                   filmName: movie.title,

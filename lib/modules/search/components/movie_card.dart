@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/modules/movie_details/movie_details.dart';
+import 'package:movie/utils/get_from_api.dart';
 
 class MovieCard extends StatelessWidget {
   String releaseDate;
   String filmName;
   String photoUrl;
+  String movieId;
   String rating;
   Function() onTap;
   MovieCard({
     required this.releaseDate,
     required this.filmName,
+    required this.movieId,
     required this.onTap,
     required this.photoUrl,
     required this.rating,
@@ -119,7 +122,9 @@ class MovieCard extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: kButtonColor,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              addToWatchlist(movieId);
+                            },
                             child: Text(
                               'Add To Watchlist',
                               style: TextStyle(fontWeight: FontWeight.bold),

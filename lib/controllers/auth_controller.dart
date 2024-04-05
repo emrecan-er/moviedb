@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie/modules/main/main_screen.dart';
@@ -10,15 +11,20 @@ import 'package:url_launcher/url_launcher.dart';
 class AuthController extends GetxController {
   var username = ''.obs;
   var password = ''.obs;
+  var currentUserAccountId = ''.obs;
+
   Future<String> loginViaWebsite() async {
     try {
       final String requestToken = await createRequestToken();
+
       final String loginUrl =
           'https://www.themoviedb.org/authenticate/$requestToken';
 
-      if (await canLaunch(loginUrl)) {
-        await launch(loginUrl);
-        log(requestToken);
+      if (await launchUrl(Uri.parse(loginUrl))) {
+        log('girdi');
+        final result = await FlutterWebAuth.authenticate(
+            url: loginUrl, callbackUrlScheme: 'foobar');
+        log(result + ' AQ');
         var sessionId = await createSession(requestToken);
         return sessionId;
       } else {
@@ -44,6 +50,24 @@ class AuthController extends GetxController {
     } else {
       Get.snackbar('Error', 'Failed to Create Token');
       throw Exception('Failed to create request token');
+    }
+  }
+
+  Future<String> getAccountId(String sessionId) async {
+    const String apiUrl = 'https://api.themoviedb.org/3/account';
+    String apiKey = dotenv.env['API_KEY']!;
+    final response = await http.get(
+      Uri.parse('$apiUrl?api_key=$apiKey&session_id=$sessionId'),
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      return responseData['id'].toString();
+    } else {
+      final errorResponse = json.decode(response.body);
+      final errorMessage =
+          errorResponse['status_message'] ?? 'Unknown error occurred';
+      throw Exception('Failed to get account ID: $errorMessage');
     }
   }
 
@@ -79,6 +103,7 @@ class AuthController extends GetxController {
   }
 
   Future<String> createSession(String requestToken) async {
+    log(requestToken);
     const String apiUrl =
         'https://api.themoviedb.org/3/authentication/session/new';
     String apiKey = dotenv.env['SESSION_KEY']!;
@@ -108,7 +133,11 @@ class AuthController extends GetxController {
       final String validatedRequestToken =
           await loginWithUsernameAndPassword(username, password, requestToken);
       final String sessionId = await createSession(validatedRequestToken);
-      log(sessionId);
+
+      final String accountId = await getAccountId(sessionId);
+      currentUserAccountId.value = accountId;
+      log('Account ID: $accountId');
+
       Get.offAll(MainScreen());
     } catch (error) {
       print('Authentication failed: $error');

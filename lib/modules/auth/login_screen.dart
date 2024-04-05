@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/constants.dart';
@@ -70,7 +72,8 @@ class LoginScreen extends StatelessWidget {
               text: 'Login via Website',
               onTap: () {
                 authController.loginViaWebsite().then((sessionId) {
-                  if (sessionId != 'asd' && sessionId.isNotEmpty) {
+                  log(sessionId);
+                  if (sessionId != 'failed' && sessionId.isNotEmpty) {
                     Get.offAll(MainScreen());
                   } else {}
                 });

@@ -27,6 +27,8 @@ dependencies:
   
   #Auth
   url_launcher: ^6.2.5
+  flutter_web_auth: ^0.5.0
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:
