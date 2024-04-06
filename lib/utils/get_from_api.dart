@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/constants.dart';
 import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/models/movie.dart';
 
@@ -37,11 +38,10 @@ Future<void> searchMovies(String query) async {
   }
 }
 
-Future<List<Movie>> fetchFavoriteMovies() async {
+Future<List<Movie>> fetchFavoriteMovies(String userId) async {
   String apiUrl =
-      'https://api.themoviedb.org/3/account/21180495/favorite/movies?language=en-US&page=1&sort_by=created_at.asc';
-  String accessToken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
+      'https://api.themoviedb.org/3/account/${userId}/favorite/movies?language=en-US&page=1&sort_by=created_at.asc';
+  String accessToken = dotenv.env['SESSION_KEY']!;
 
   try {
     var response = await http.get(
@@ -69,9 +69,7 @@ Future<List<Movie>> fetchFavoriteMovies() async {
 
 Future<void> favorites(String id, bool add, String userId) async {
   String apiUrl = 'https://api.themoviedb.org/3/account/${userId}/favorite';
-  String accessToken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
-
+  String accessToken = dotenv.env['SESSION_KEY']!;
   try {
     var response = await http.post(
       Uri.parse(apiUrl),
@@ -89,26 +87,19 @@ Future<void> favorites(String id, bool add, String userId) async {
 
     if (response.statusCode == 200) {
       print('Film/dizi başarıyla favorilere eklendi.');
-      Get.snackbar(
-        'Favorites',
-        'Done ✅',
-      );
+      Get.snackbar('Favorites', 'Done ✅', colorText: Colors.white);
     } else {
-      Get.snackbar(
-        'Favorites',
-        'Done ✅',
-      );
+      Get.snackbar('Favorites', 'Done ✅', colorText: Colors.white);
     }
   } catch (e) {
     print('İstek yapılırken bir hata oluştu: $e');
   }
 }
 
-Future<List<Movie>> fetchWatchlistMovies() async {
+Future<List<Movie>> fetchWatchlistMovies(String userId) async {
   String apiUrl =
-      'https://api.themoviedb.org/3/account/21180495/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc';
-  String accessToken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
+      'https://api.themoviedb.org/3/account/${userId}/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc';
+  String accessToken = dotenv.env['SESSION_KEY']!;
 
   try {
     var response = await http.get(
@@ -136,9 +127,7 @@ Future<List<Movie>> fetchWatchlistMovies() async {
 
 void watchlist(String mediaId, bool add, String userId) async {
   String apiUrl = 'https://api.themoviedb.org/3/account/${userId}/watchlist';
-  String accessToken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
-
+  String accessToken = dotenv.env['SESSION_KEY']!;
   try {
     var response = await http.post(
       Uri.parse(apiUrl),

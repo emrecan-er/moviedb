@@ -2,38 +2,28 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie/constants.dart';
+import 'package:movie/db_helper.dart';
+import 'package:movie/modules/auth/auth_login.dart';
 import 'package:movie/modules/main/main_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AuthController extends GetxController {
   var username = ''.obs;
   var password = ''.obs;
   var currentUserAccountId = ''.obs;
 
-  Future<String> loginViaWebsite() async {
+  Future<void> loginViaWebsite() async {
     try {
       final String requestToken = await createRequestToken();
-
-      final String loginUrl =
-          'https://www.themoviedb.org/authenticate/$requestToken';
-
-      if (await launchUrl(Uri.parse(loginUrl))) {
-        log('girdi');
-        final result = await FlutterWebAuth.authenticate(
-            url: loginUrl, callbackUrlScheme: 'foobar');
-        log(result + ' AQ');
-        var sessionId = await createSession(requestToken);
-        return sessionId;
-      } else {
-        throw 'Could not launch $loginUrl';
-      }
+      log(requestToken);
+      Get.to(
+        AuthLogin(),
+        arguments: [requestToken],
+      );
     } catch (error) {
       print('Login via website failed: $error');
-      return 'failed';
     }
   }
 
@@ -137,8 +127,7 @@ class AuthController extends GetxController {
 
       final String accountId = await getAccountId(sessionId);
       currentUserId = accountId;
-      log(currentUserId + ' USER ID BU MU');
-      log('Account ID: $accountId');
+      prefs.setString('currentUserId', currentUserId);
 
       Get.offAll(MainScreen());
     } catch (error) {

@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/controllers/auth_controller.dart';
 import 'package:movie/modules/auth/components/login_button.dart';
-import 'package:movie/modules/main/main_screen.dart';
 import 'package:movie/modules/search/components/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -71,12 +70,14 @@ class LoginScreen extends StatelessWidget {
           LoginButton(
               text: 'Login via Website',
               onTap: () {
-                authController.loginViaWebsite().then((sessionId) {
+                // Get.to(AuthLogin());
+                authController.loginViaWebsite();
+                /* authController.loginViaWebsite().then((sessionId) {
                   log(sessionId);
                   if (sessionId != 'failed' && sessionId.isNotEmpty) {
                     Get.offAll(MainScreen());
                   } else {}
-                });
+                });*/
               }),
         ],
       ),

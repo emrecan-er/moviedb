@@ -31,11 +31,19 @@ dependencies:
 
   #Local Database,Offline Cache
   hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  #Local Database for Primitive Types
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+  #LocalDB
+  build_runner:
+  hive_generator:
 
 flutter:
   uses-material-design: true

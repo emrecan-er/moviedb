@@ -9,13 +9,12 @@ import 'package:movie/utils/get_from_api.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;
-  final bool isFavorite;
   final MovieController controller;
 
-  const MovieDetails(
-      {required this.movie,
-      required this.controller,
-      required this.isFavorite});
+  const MovieDetails({
+    required this.movie,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +83,12 @@ class MovieDetails extends StatelessWidget {
                       IconButton(
                         splashRadius: 15,
                         onPressed: () {
-                          controller.favoriteMovie.value =
-                              !controller.favoriteMovie.value;
-                          favorites(movie.id.toString(), true, currentUserId);
+                          if (controller.favoriteMovie.value) {
+                            Get.snackbar('Error', 'Already Favorited');
+                          } else {
+                            favorites(movie.id.toString(), true, currentUserId);
+                            controller.favoriteMovie.value = true;
+                          }
                         },
                         icon: Obx(
                           () => controller.favoriteMovie.value

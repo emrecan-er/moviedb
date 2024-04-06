@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -50,7 +48,6 @@ class SearchScreen extends StatelessWidget {
                                 Get.off(MovieDetails(
                                   movie: movie,
                                   controller: controller,
-                                  isFavorite: false,
                                 ));
                               },
                             );
@@ -68,7 +65,16 @@ class SearchScreen extends StatelessWidget {
                                 child: Lottie.asset('assets/popcorn.json',
                                     width: 100));
                           } else if (snapshot.hasError) {
-                            return Center(child: Text("${snapshot.error}"));
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                LottieBuilder.asset('assets/internet.json'),
+                                Text(
+                                  'Connection Error',
+                                  style: TextStyle(color: Colors.white),
+                                )
+                              ],
+                            );
                           } else if (!snapshot.hasData) {
                             return const Center(
                                 child: Text("No data available"));
@@ -90,7 +96,6 @@ class SearchScreen extends StatelessWidget {
                                     Get.off(MovieDetails(
                                       movie: movie,
                                       controller: controller,
-                                      isFavorite: false,
                                     ));
                                   },
                                 );

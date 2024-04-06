@@ -1,0 +1,1 @@
+ /Users/emrecaner/Desktop/dev/flutter/projects/moviedb/.dart_tool/flutter_build/0124d35a89139722e01dc0bdb19f5a9e/native_assets.yaml: 
