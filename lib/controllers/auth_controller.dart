@@ -53,6 +53,9 @@ class AuthController extends GetxController {
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
+      final String accountId = responseData['id'].toString();
+      currentUserId = accountId;
+      prefs.setString('currentUserId', currentUserId);
       return responseData['id'].toString();
     } else {
       final errorResponse = json.decode(response.body);
