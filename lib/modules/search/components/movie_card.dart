@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/constants.dart';
-import 'package:movie/modules/movie_details/movie_details.dart';
+import 'package:movie/controllers/auth_controller.dart';
 import 'package:movie/utils/get_from_api.dart';
 
 class MovieCard extends StatelessWidget {
+  AuthController authController = Get.put(AuthController());
   String releaseDate;
   String filmName;
   String photoUrl;
@@ -123,7 +124,11 @@ class MovieCard extends StatelessWidget {
                               backgroundColor: kButtonColor,
                             ),
                             onPressed: () {
-                              addToWatchlist(movieId);
+                              watchlist(
+                                movieId,
+                                true,
+                                currentUserId,
+                              );
                             },
                             child: Text(
                               'Add To Watchlist',

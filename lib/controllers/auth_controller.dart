@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/constants.dart';
 import 'package:movie/modules/main/main_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -135,7 +136,8 @@ class AuthController extends GetxController {
       final String sessionId = await createSession(validatedRequestToken);
 
       final String accountId = await getAccountId(sessionId);
-      currentUserAccountId.value = accountId;
+      currentUserId = accountId;
+      log(currentUserId + ' USER ID BU MU');
       log('Account ID: $accountId');
 
       Get.offAll(MainScreen());

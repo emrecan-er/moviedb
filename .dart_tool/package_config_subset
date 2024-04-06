@@ -30,10 +30,6 @@ crypto
 2.19
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/crypto-3.0.3/
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/crypto-3.0.3/lib/
-cupertino_icons
-2.19
-file:///Users/emrecaner/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6/
-file:///Users/emrecaner/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6/lib/
 fake_async
 2.12
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/fake_async-1.3.1/
@@ -54,6 +50,10 @@ get
 2.15
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/get-4.6.6/
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/get-4.6.6/lib/
+hive
+2.12
+file:///Users/emrecaner/.pub-cache/hosted/pub.dev/hive-2.2.3/
+file:///Users/emrecaner/.pub-cache/hosted/pub.dev/hive-2.2.3/lib/
 http
 3.2
 file:///Users/emrecaner/.pub-cache/hosted/pub.dev/http-1.2.0/

@@ -1,13 +1,15 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:movie/utils/get_from_api.dart';
 
 class MovieController extends GetxController {
-  var currentIndex = 0.obs;
+  var currentIndex = 0.obs; //BottomNavigationBar indexi
   var search = false.obs;
+  var favoriteMovie = false.obs;
   var searchedMovies = [].obs;
-
+  var favoriteMovieListDb =
+      [].obs; //Internet olmadığında LocalDB ye kaydettiğim listeler.
+  var watchlistMovieDb =
+      [].obs; // Internet olmadığında LocalDB' ye kaydettiği listeler.
   @override
   void onInit() {
     // TODO: implement onInit
@@ -15,11 +17,12 @@ class MovieController extends GetxController {
     fetchMovies();
   }
 
+//Navbar Item Değiştirme
   onItemTapped(int index) {
     currentIndex.value = index;
-    log(currentIndex.value.toString());
   }
 
+//Gelen film verisinin tarihini format etme fonksiyonu
   String formatReleaseDate(String? releaseDate) {
     if (releaseDate == null || releaseDate.isEmpty) {
       return '';

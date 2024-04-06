@@ -1,17 +1,21 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/models/movie.dart';
 import 'package:movie/modules/main/main_screen.dart';
-import 'package:movie/modules/search/search_screen.dart';
+import 'package:movie/utils/get_from_api.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;
+  final bool isFavorite;
   final MovieController controller;
 
-  const MovieDetails({required this.movie, required this.controller});
+  const MovieDetails(
+      {required this.movie,
+      required this.controller,
+      required this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +80,26 @@ class MovieDetails extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: AppBar(
+                    actions: [
+                      IconButton(
+                        splashRadius: 15,
+                        onPressed: () {
+                          controller.favoriteMovie.value =
+                              !controller.favoriteMovie.value;
+                          favorites(movie.id.toString(), true, currentUserId);
+                        },
+                        icon: Obx(
+                          () => controller.favoriteMovie.value
+                              ? Icon(Icons.favorite)
+                              : Icon(Icons.favorite_outline),
+                        ),
+                      ),
+                    ],
                     leading: IconButton(
                         onPressed: () {
                           Get.off(MainScreen());
                           controller.searchedMovies.clear();
+                          controller.favoriteMovie.value = false;
                         },
                         icon: Icon(Icons.arrow_back)),
                     backgroundColor: Colors.transparent,

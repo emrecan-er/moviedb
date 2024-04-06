@@ -37,6 +37,73 @@ Future<void> searchMovies(String query) async {
   }
 }
 
+Future<List<Movie>> fetchFavoriteMovies() async {
+  String apiUrl =
+      'https://api.themoviedb.org/3/account/21180495/favorite/movies?language=en-US&page=1&sort_by=created_at.asc';
+  String accessToken =
+      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
+
+  try {
+    var response = await http.get(
+      Uri.parse(apiUrl),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'accept': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      List<Movie> movies = [];
+      List<dynamic> jsonData = jsonDecode(response.body)['results'];
+      jsonData.forEach((movie) {
+        movies.add(Movie.fromJson(movie));
+      });
+      return movies;
+    } else {
+      throw Exception('Failed to load favorite movies');
+    }
+  } catch (e) {
+    throw Exception('Error fetching favorite movies: $e');
+  }
+}
+
+Future<void> favorites(String id, bool add, String userId) async {
+  String apiUrl = 'https://api.themoviedb.org/3/account/${userId}/favorite';
+  String accessToken =
+      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
+
+  try {
+    var response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "media_type": "movie",
+        "media_id": id,
+        "favorite": add, //Eğer false geliyorsa favorilerden çıkartıyor.
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print('Film/dizi başarıyla favorilere eklendi.');
+      Get.snackbar(
+        'Favorites',
+        'Done ✅',
+      );
+    } else {
+      Get.snackbar(
+        'Favorites',
+        'Done ✅',
+      );
+    }
+  } catch (e) {
+    print('İstek yapılırken bir hata oluştu: $e');
+  }
+}
+
 Future<List<Movie>> fetchWatchlistMovies() async {
   String apiUrl =
       'https://api.themoviedb.org/3/account/21180495/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc';
@@ -67,8 +134,8 @@ Future<List<Movie>> fetchWatchlistMovies() async {
   }
 }
 
-void addToWatchlist(String mediaId) async {
-  String apiUrl = 'https://api.themoviedb.org/3/account/21180495/watchlist';
+void watchlist(String mediaId, bool add, String userId) async {
+  String apiUrl = 'https://api.themoviedb.org/3/account/${userId}/watchlist';
   String accessToken =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGU4MGNkODMyNjUyYWQ0Yjg2NGM1MWM4ZTU4OGFlYyIsInN1YiI6IjY2MGM3OGQ0ZTAzOWYxMDE0OWU0NzExZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FwXC9wXvJJrOc8_j56Bl-h1fqtk8DjQIbDFxfjy_WwQ';
 
@@ -80,14 +147,13 @@ void addToWatchlist(String mediaId) async {
         'accept': 'application/json',
         'content-type': 'application/json',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         "media_type": "movie",
         "media_id": mediaId,
-        "watchlist": 'true',
+        "watchlist": add,
       }),
     );
-    Get.snackbar('Watchlist', 'The movie succesfully added to watchlist',
-        colorText: Colors.white);
+    Get.snackbar('Watchlist', 'Done ✅', colorText: Colors.white);
 
     if (response.statusCode == 200) {
       log('geldi');

@@ -50,6 +50,7 @@ class SearchScreen extends StatelessWidget {
                                 Get.off(MovieDetails(
                                   movie: movie,
                                   controller: controller,
+                                  isFavorite: false,
                                 ));
                               },
                             );
@@ -89,6 +90,7 @@ class SearchScreen extends StatelessWidget {
                                     Get.off(MovieDetails(
                                       movie: movie,
                                       controller: controller,
+                                      isFavorite: false,
                                     ));
                                   },
                                 );

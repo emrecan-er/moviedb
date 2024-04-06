@@ -5,7 +5,6 @@ import 'package:movie/constants.dart';
 import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/models/movie.dart';
 import 'package:movie/modules/movie_details/movie_details.dart';
-import 'package:movie/modules/search/components/movie_card.dart';
 import 'package:movie/modules/watchlist/components/watchlist_card.dart';
 import 'package:movie/utils/get_from_api.dart';
 
@@ -47,9 +46,14 @@ class WatchlistScreen extends StatelessWidget {
                   rating: movie.voteAverage.toStringAsFixed(1),
                   onTap: () {
                     Get.off(MovieDetails(
+                      isFavorite: false,
                       movie: movie,
                       controller: controller,
                     ));
+                  },
+                  dismisibleKey: Key(movie.id.toString()),
+                  onDismissed: (DismissDirection direction) {
+                    watchlist(movie.id.toString(), false, currentUserId);
                   },
                 );
               },

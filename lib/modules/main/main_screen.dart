@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   static final List<Widget> _screenList = <Widget>[
     SearchScreen(),
     WatchlistScreen(),
-    Favorites(),
+    FavoritesScreen(),
   ];
 
   MainScreen({super.key});
