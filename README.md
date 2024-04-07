@@ -1,6 +1,17 @@
-# Oyun ve Uygulama Akademisi
+# moviedb
 
-App Jam F1
+## Technologies
+
+Flutter,Dart
+
+State Management : GetX
+
+API : themoviedb.org
+
+LocalDB : Hive
+
+Local DB for Primitive Types : SharedPreferences
+
 
 
 ## Screenshots
