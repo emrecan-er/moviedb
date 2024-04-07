@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/constants.dart';
-import 'package:movie/modules/movie_details/movie_details.dart';
-import 'package:movie/utils/get_from_api.dart';
 
 class WatchlistCard extends StatelessWidget {
   String releaseDate;
@@ -36,8 +34,8 @@ class WatchlistCard extends StatelessWidget {
             color: Colors.red,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -77,7 +75,7 @@ class WatchlistCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           bottomLeft: Radius.circular(8)),
                       child: photoUrl == ''
@@ -94,7 +92,7 @@ class WatchlistCard extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -108,27 +106,28 @@ class WatchlistCard extends StatelessWidget {
                           filmName.length > 50
                               ? filmName.substring(0, 20) + '...'
                               : filmName,
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Text(
                             rating,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Icon(

@@ -27,13 +27,14 @@ class SearchScreen extends StatelessWidget {
               obscureText: false,
               onChanged: (input) {
                 searchMovies(input);
+                controller.update();
               },
             ),
             Obx(
               () => controller.searchedMovies.isNotEmpty
-                  ? Expanded(
-                      child: Obx(() {
-                        return ListView.builder(
+                  ? Obx(
+                      () => Expanded(
+                        child: ListView.builder(
                           itemCount: controller.searchedMovies.length,
                           itemBuilder: (context, index) {
                             Movie movie = controller.searchedMovies[index];
@@ -52,8 +53,8 @@ class SearchScreen extends StatelessWidget {
                               },
                             );
                           },
-                        );
-                      }),
+                        ),
+                      ),
                     )
                   : Expanded(
                       child: FutureBuilder<List<Movie>>(
@@ -69,7 +70,7 @@ class SearchScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 LottieBuilder.asset('assets/internet.json'),
-                                Text(
+                                const Text(
                                   'Connection Error',
                                   style: TextStyle(color: Colors.white),
                                 )

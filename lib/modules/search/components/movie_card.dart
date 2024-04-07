@@ -41,7 +41,7 @@ class MovieCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8),
                         bottomLeft: Radius.circular(8)),
                     child: photoUrl == ''
@@ -58,7 +58,7 @@ class MovieCard extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
@@ -67,12 +67,13 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         filmName.length > 50
                             ? filmName.substring(0, 20) + '...'
                             : filmName,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                     Container(
@@ -90,35 +91,36 @@ class MovieCard extends StatelessWidget {
                             color: Colors.white,
                             size: 19,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
                             releaseDate,
-                            style: TextStyle(color: Colors.white, fontSize: 13),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 13),
                           ),
                         ],
                       ),
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
                           rating,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Padding(
-                          padding: EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: kButtonColor,
@@ -130,7 +132,7 @@ class MovieCard extends StatelessWidget {
                                 currentUserId,
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Add To Watchlist',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

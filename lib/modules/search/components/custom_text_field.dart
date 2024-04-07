@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:movie/constants.dart';
 
 class CustomFormField extends StatelessWidget {
@@ -24,17 +23,17 @@ class CustomFormField extends StatelessWidget {
           cursorColor: kButtonColor,
           keyboardType: TextInputType.multiline,
           maxLines: 1,
-          scrollPadding: EdgeInsets.only(bottom: 40),
+          scrollPadding: const EdgeInsets.only(bottom: 40),
           onChanged: onChanged,
           obscureText: obscureText,
           autofocus: false,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.normal,
             color: Colors.white,
             fontFamily: 'VarelaRound',
           ),
           decoration: InputDecoration(
-            labelStyle: TextStyle(color: Colors.red),
+            labelStyle: const TextStyle(color: Colors.red),
             prefixIcon: Icon(
               prefixIcon,
               color: Colors.white,
@@ -48,8 +47,8 @@ class CustomFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(32.0),
             ),
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.white54, fontSize: 14),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            hintStyle: const TextStyle(color: Colors.white54, fontSize: 14),
+            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0),
             ),

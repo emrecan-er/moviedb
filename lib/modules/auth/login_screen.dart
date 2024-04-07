@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/constants.dart';
@@ -51,7 +49,7 @@ class LoginScreen extends StatelessWidget {
             },
             prefixIcon: Icons.password,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           LoginButton(
@@ -60,8 +58,8 @@ class LoginScreen extends StatelessWidget {
                 authController.authenticateUser(authController.username.value,
                     authController.password.value);
               }),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'OR',
               style: TextStyle(color: Colors.white54, fontSize: 20),

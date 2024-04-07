@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/modules/favorites/favorites.dart';
-import 'package:movie/modules/search/components/movie_card.dart';
 import 'package:movie/modules/search/search_screen.dart';
 import 'package:movie/modules/watchlist/watchlist.dart';
 
+//Navigaton Barı kullanmak için ekran tasarladım
 class MainScreen extends StatelessWidget {
   MovieController controller = Get.put(MovieController());
   static final List<Widget> _screenList = <Widget>[

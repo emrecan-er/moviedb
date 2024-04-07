@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Movie {
   final bool adult;
   final String backdropPath;

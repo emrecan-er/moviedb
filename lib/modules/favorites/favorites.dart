@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -25,7 +23,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favorites'),
+        title: const Text('Favorites'),
         actions: [
           IconButton(
               splashRadius: 2,
@@ -38,7 +36,7 @@ class FavoritesScreen extends StatelessWidget {
                 );
                 Get.offAll(LoginScreen());
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
         backgroundColor: kCardColor,
       ),

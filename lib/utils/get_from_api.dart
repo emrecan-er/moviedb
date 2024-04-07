@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:movie/constants.dart';
 import 'package:movie/controllers/movie_controller.dart';
 import 'package:movie/models/movie.dart';
 
@@ -23,6 +22,7 @@ Future<void> searchMovies(String query) async {
   );
 
   if (response.statusCode == 200) {
+    log('Başarılı');
     controller.searchedMovies.clear();
 
     log(controller.search.value.toString());
@@ -30,9 +30,9 @@ Future<void> searchMovies(String query) async {
     final List<Movie> movies = (jsonData['results'] as List)
         .map((movieJson) => Movie.fromJson(movieJson))
         .toList();
-    controller.searchedMovies.assignAll(movies);
+    controller.searchedMovies.value.assignAll(movies);
+    inspect(controller.searchedMovies.value);
     controller.update();
-    inspect(movies);
   } else {
     print('Failed to load movies, status code: ${response.statusCode}');
   }

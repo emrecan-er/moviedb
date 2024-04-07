@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:movie/constants.dart';
 import 'package:movie/controllers/auth_controller.dart';
 import 'package:movie/db_helper.dart';
+import 'package:movie/modules/auth/login_screen.dart';
 import 'package:movie/modules/main/main_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -41,17 +42,33 @@ final controller = WebViewController()
       Uri.parse('https://www.themoviedb.org/authenticate/${Get.arguments[0]}'));
 
 getUserData(String url) async {
+  // Site sonuç olarak /allow uzatısı döndürüyor.allow uzantısını yakalamak için split metodunu kullandık.
   var sonuc = url.split('/');
+
+  //Videoda Göstermek için
+  log('\n\n');
+
+  log(sonuc[0]);
+  log(sonuc[1]);
+  log(sonuc[2]);
+  log(sonuc[3]);
+  log(sonuc[4]);
+  log(sonuc[5]);
+
+  log('\n\n');
+
   if (sonuc[5] == 'allow') {
     var session = await authController.createSession(
       Get.arguments[0],
     );
-    inspect(session);
 
     var accountId = await authController.getAccountId(session);
     currentUserId = accountId;
     prefs.setString('currentUserId', currentUserId);
 
     Get.offAll(MainScreen());
-  } else {}
+  } else {
+    Get.snackbar('Error', 'Denied', colorText: Colors.white);
+    Get.offAll(LoginScreen());
+  }
 }
