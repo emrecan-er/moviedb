@@ -45,7 +45,7 @@ getUserData(String url) async {
   // Site sonuç olarak /allow uzatısı döndürüyor.allow uzantısını yakalamak için split metodunu kullandık.
   var sonuc = url.split('/');
 
-  //Videoda Göstermek için
+  //Videoda Göstermek için yaptım,inspect hata verebiliyor.
   log('\n\n');
 
   log(sonuc[0]);
